@@ -7,7 +7,7 @@ import { PlayerMapper } from '../components/PlayerMapper';
 import { PageHeader } from '../components/PageHeader';
 import { Layout } from '../components/Layout';
 
-import rosters2023 from '../data/rosters2023.json';
+import rosters2024 from '../data/rosters2024.json';
 import { saveRosters } from '../data/saveRosters';
 
 import { usePoolContext } from '../data/PoolContextProvider';
@@ -105,9 +105,9 @@ export const sortRosterPlayers = (players) => {
 */
 // const battersUrl = "https://bdfed.stitch.mlbinfra.com/bdfed/stats/player?stitch_env=prod&season=2021&stats=season&group=hitting&gameType=R&limit=1000&offset=0&sortStat=onBasePlusSlugging&order=desc&playerPool=ALL_CURRENT&leagueIds=103";
 
-const battersUrl = "https://bdfed.stitch.mlbinfra.com/bdfed/stats/player?stitch_env=prod&season=2023&sportId=1&stats=season&group=hitting&gameType=R&limit=300&offset=0&sortStat=onBasePlusSlugging&order=desc";
+const battersUrl = "https://bdfed.stitch.mlbinfra.com/bdfed/stats/player?stitch_env=prod&season=2024&sportId=1&stats=season&group=hitting&gameType=R&limit=300&offset=0&sortStat=onBasePlusSlugging&order=desc";
 
-const pitchersUrl = "https://bdfed.stitch.mlbinfra.com/bdfed/stats/player?stitch_env=prod&season=2023&stats=season&group=pitching&gameType=R&limit=1000&offset=0&sortStat=earnedRunAverage&order=asc&playerPool=ALL_CURRENT&leagueIds=103";
+const pitchersUrl = "https://bdfed.stitch.mlbinfra.com/bdfed/stats/player?stitch_env=prod&season=2024&stats=season&group=pitching&gameType=R&limit=1000&offset=0&sortStat=earnedRunAverage&order=asc&playerPool=ALL_CURRENT&leagueIds=103";
 
 
 
@@ -124,11 +124,11 @@ function HomePage() {
   // let commaSource = [];
 
 
-  // let tempOutput = rosters2023['bashers'].players;
+  // let tempOutput = rosters2024['bashers'].players;
 
 
   // Object.keys(rosters3).map((rosterKey) => {
-  //   rosters2023[rosterKey].players.map((player) => {
+  //   rosters2024[rosterKey].players.map((player) => {
   //     commaSource.push({
   //       name:player.name,
   //       roster: player.roster,
@@ -156,10 +156,10 @@ function HomePage() {
   useEffect(() => {
 
     // if (!window.localStorage.getItem(CONSTANTS.ROSTER_DATA_NAME)) {
-    //   window.localStorage.setItem(CONSTANTS.ROSTER_DATA_NAME, JSON.stringify(rosters2023));
+    //   window.localStorage.setItem(CONSTANTS.ROSTER_DATA_NAME, JSON.stringify(rosters2024));
     // }
     //let rosterBlob = JSON.parse(window.localStorage.getItem(CONSTANTS.ROSTER_DATA_NAME));
-    let rosterBlob = rosters2023;
+    let rosterBlob = rosters2024;
     Object.keys(rosterBlob).map((rosterKey) => {
       rosterBlob[rosterKey].players.map((player) => {
         if (!player.roster) {
@@ -830,20 +830,18 @@ return (<Layout>
         <a href="https://sports.yahoo.com/mlb/scoreboard/" target="_blank">Scores</a>
       </div>
       <div>
-        <h3>Trade - June 13, 2023</h3>
+        <h3>Trade - April 5, 2024</h3>
         <div>
           <p>To Stallions:</p>
           <ul>
-            <li>RP Jordan Romano Tor</li>
-            <li>OF Kyle Tucker Hou</li>
+            <li>3rd round draft pick</li>
+            <li>5th round draft pick</li>
           </ul>
           <p>To Mashers:</p>
           <ul>
-            <li>Stallions’ 1st Round Pick @ All-Star Break</li>
-            <li>RP Liam Hendricks CHW</li>
-            <li>OF Taylor Ward Ana</li>
-            <li>Move OF Isaac Paredes TB to 2B</li>
-            <li>Activate 3B Josh Jung Tex to Starting Roster</li>
+            <li>2B G Torres NYY</li>
+            <li>RP C Esteves LAA</li>
+            <li>SS A Volpe NYY</li>
           </ul>
         </div>
       </div>
