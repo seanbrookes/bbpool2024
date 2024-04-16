@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { CONSTANTS } from '../constants';
+import { StarterPosContainer } from './StarterPosContainer';
+import { ClosersPosContainer } from './CloserPosContainer';
+import { HitterPosContainer } from './HitterPosContainer';
 
 import {
   getPositionScoreData,
@@ -147,206 +150,6 @@ const getHitterTotal = (hitter) => {
   }
   return (hitter.runs) + (hitter.hits / 2) + (hitter.rbi) + (hitter.homeRuns * 2) + (hitter.stolenBases / 2);;
 };
-const getStarterTotal = (starter) => {
-  if (!starter.playerId) {
-    return 0;
-  }
-  const totalVal = ((starter.wins * 15) - (starter.losses * 4) + (starter.strikeOuts / 2));
-  return totalVal;
-};
-const geCloserTotal = (reliever) => {
-  const totalVal = (reliever.saves * 7) + (reliever.wins * 6) + (reliever.strikeOuts / 2) + (reliever.inningsPitched / 2);
-  return totalVal;
-};
-
-const HitterPosContainer = ({hittersBlob, pos, roster}) => {
-  if (!pos) {
-    return null;
-  }
-  const thePosition = hittersBlob && hittersBlob[pos];
-  const allPosition = thePosition ? Object.keys(thePosition).map((key) => thePosition[key]) : [];
-  const rosterPosition = allPosition && allPosition.filter((player) => {
-    return player.roster === roster;
-  }).sort((a, b) => {
-    var x = a.total;
-    var y = b.total;
-    return x > y ? -1 : x < y ? 1 : 0;
-  });
-  return (
-    <HitterPosTable>
-      <thead>
-        <tr>
-          <th></th>
-          <th><Link href={`/pos/${pos}`}><a><PosLabel>{pos}</PosLabel></a></Link></th>
-          <th></th>
-          <th>r</th>
-          <th>h</th>
-          <th>hr</th>
-          <th>rbi</th>
-          <th>sb</th>
-          <th>total</th>
-        </tr>
-      </thead>
-      <tbody>
-      {rosterPosition && rosterPosition.map((player, index) => {
-        let rowStyle = {};
-        if (pos === 'OF') {
-          if (index < 3) {
-            rowStyle['backgroundColor'] = '#efefef';
-            rowStyle['fontWeight'] = 400;
-          }
-          else {
-            rowStyle['fontWeight'] = 300;
-            rowStyle['color'] = '#777777';
-          }
-  
-        }
-        else {
-          if (index === 0) {
-            rowStyle['backgroundColor'] = '#efefef';
-            rowStyle['fontWeight'] = 400;
-          }
-          else {
-            rowStyle['fontWeight'] = 300;
-            rowStyle['color'] = '#777777';
-          }
-        }
-        if (player.status && player.status === 'prospect') {
-          rowStyle['backgroundColor'] = '#eff1fc';          
-        }        
-        return (
-          <tr style={rowStyle} key={index}>
-            <td style={{fontSize: '9px', color: '#444444'}}>{index + 1}</td>
-            <td><NameCell><a target="_new" href={player.newsLink}>{player.name}</a></NameCell></td>
-            <td><TeamCell>{player.team}</TeamCell></td>
-            <td><RunsCell>{player.runs}</RunsCell></td>
-            <td><HitsCell>{player.hits}</HitsCell></td>
-            <td><HRCell>{player.homeRuns}</HRCell></td>
-            <td><RBICell>{player.rbi}</RBICell></td>
-            <td><SBCell>{player.stolenBases}</SBCell></td>
-            <td><TotalCell>{player.total}</TotalCell></td>
-          </tr>
-        );
-      })}
-      </tbody>
-    </HitterPosTable>
-  );
-};
-
-const StarterPosContainer = ({startersBlob, roster}) => {
-  const thePosition = startersBlob && startersBlob['SP'];
-  const allPosition = thePosition ? Object.keys(thePosition).map((key) => thePosition[key]) : [];
-  const rosterPosition = allPosition && allPosition.filter((player) => {
-    return player.roster === roster;
-  }).sort((a, b) => {
-    var x = a.total;
-    var y = b.total;
-    return x > y ? -1 : x < y ? 1 : 0;
-  });
-  return (
-    <HitterPosTable>
-      <thead>
-        <tr>
-          <th></th>
-          <th><Link href={`/pos/SP`}><a><PosLabel>Starters</PosLabel></a></Link></th>
-          <th></th>
-          <th></th>
-          <th>w</th>
-          <th>l</th>
-          <th>k</th>
-          <th></th>
-          <th>total</th>
-        </tr>
-      </thead>
-      <tbody>    
-      {rosterPosition && rosterPosition.map((player, index) => {
-        let rowStyle = {};
-        if (index < 4) {
-          rowStyle['backgroundColor'] = '#efefef';
-          rowStyle['fontWeight'] = 400;
-        }
-        else {
-          rowStyle['fontWeight'] = 300;
-          rowStyle['color'] = '#777777';
-        }
-        if (player.status && player.status === 'prospect') {
-          rowStyle['backgroundColor'] = '#eff1fc';          
-        }              
-        return (
-          <tr style={rowStyle} key={index}>
-            <td style={{fontSize: '9px', color: '#444444'}}>{index + 1}</td>
-            <td><NameCell><a target="_new" href={player.newsLink}>{player.name}</a></NameCell></td>
-            <td><TeamCell>{player.team}</TeamCell></td>
-            <td><RunsCell></RunsCell></td>
-            <td><HitsCell>{player.wins}</HitsCell></td>
-            <td><HRCell>{player.losses}</HRCell></td>
-            <td><RBICell>{player.strikeOuts}</RBICell></td>
-            <td><SBCell></SBCell></td>
-            <td><TotalCell>{player.total}</TotalCell></td>
-          </tr>
-        );
-      })}
-      </tbody>
-    </HitterPosTable>
-  );
-};
-const ClosersPosContainer = ({pitchersBlob, roster}) => {
-  const thePosition = pitchersBlob && pitchersBlob['RP'];
-  const allPosition = thePosition ? Object.keys(thePosition).map((key) => thePosition[key]): [];
-  const rosterPosition = allPosition && allPosition.filter((player) => {
-    return player.roster === roster;
-  }).sort((a, b) => {
-    var x = a.total;
-    var y = b.total;
-    return x > y ? -1 : x < y ? 1 : 0;
-  });
-  return (
-    <HitterPosTable>
-      <thead>
-        <tr>
-          <th></th>
-          <th><Link href={`/pos/RP`}><a><PosLabel>Closers</PosLabel></a></Link></th>
-          <th></th>
-          <th>sv</th>
-          <th>w</th>
-          <th>l</th>
-          <th>k</th>
-          <th>ip</th>
-          <th>total</th>
-        </tr>
-      </thead>
-      <tbody>   
-      {rosterPosition && rosterPosition.map((player, index) => {
-        let rowStyle = {};
-        if (index < 2) {
-          rowStyle['backgroundColor'] = '#efefef';
-          rowStyle['fontWeight'] = 400;
-        }
-        else {
-          rowStyle['fontWeight'] = 300;
-          rowStyle['color'] = '#777777';
-        }
-        if (player.status && player.status === 'prospect') {
-          rowStyle['backgroundColor'] = '#eff1fc';          
-        }      
-        return (
-          <tr style={rowStyle} key={index}>
-            <td style={{fontSize: '9px', color: '#444444'}}>{index + 1}</td>
-            <td><NameCell><a target="_new" href={player.newsLink}>{player.name}</a></NameCell></td>
-            <td><TeamCell>{player.team}</TeamCell></td>
-            <td><RunsCell>{player.saves}</RunsCell></td>
-            <td><HitsCell>{player.wins}</HitsCell></td>
-            <td><HRCell>{player.losses}</HRCell></td>
-            <td><RBICell>{player.strikeOuts}</RBICell></td>
-            <td><SBCell>{player.inningsPitched}</SBCell></td>
-            <td><TotalCell>{player.total}</TotalCell></td>
-          </tr>
-        );
-      })}
-      </tbody>
-    </HitterPosTable>
-  );
-};
 
 export const RosterManager = ({mlbHitters, mlbPitchers, roster = {}, saveRosters, isHiddenOn, onUpdateRosterTotal}) => {
   const [targetNewPlayer, setTargetNewPlayer] = useState(null);
@@ -378,6 +181,9 @@ export const RosterManager = ({mlbHitters, mlbPitchers, roster = {}, saveRosters
   }, [roster, mlbHitters, mlbPitchers]);
   
   useEffect(() => {
+    // console.log('|');
+    // console.log(`| RosterManager slug[${roster.slug}] roster.total[${roster.total}] grandTotal[${grandTotal}]`);
+    // console.log('|');
     onUpdateRosterTotal(roster.slug, grandTotal);
   }, [grandTotal]);
 
