@@ -43,9 +43,9 @@ is the switch to turn on local editing controls in index.js
   const [isHiddenOn, setIsHiddenOn] = useState(true);
 ```
 
-https://github.com/seanbrookes/bbpool2023
+https://github.com/seanbrookes/bbpool2024
 
-https://vercel.com/seanbrookes/bbpool2023 
+https://vercel.com/seanbrookes/bbpool2024 
 
 ```
 hiiter total calc:
