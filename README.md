@@ -1,4 +1,4 @@
-# bbpool2023
+# bbpool2024
 Annual friends baseball pool site.
 
 Note to self: use Google sheets  for the draft/protected list
@@ -23,7 +23,7 @@ closers: wins, saves, k's
 
 Hosted using Vercel app hosting - pretty slick
 
-https://bbpool2023.vercel.app/
+https://bbpool2024.vercel.app/
 ![pool screenshot](https://user-images.githubusercontent.com/1751524/124396823-ce6ccb00-dcc0-11eb-81cd-e390f6bb16f0.png)
 
 
@@ -35,7 +35,7 @@ Note this is only for local development as there is no api in production as ther
 ```
 $npm run dev
 ```
-should come up on port 2023
+should come up on port 2024
 
 ### isHiddenOn
 is the switch to turn on local editing controls in index.js
