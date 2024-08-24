@@ -809,6 +809,20 @@ return (<Layout>
         <a href="https://sports.yahoo.com/mlb/scoreboard/" target="_blank">Scores</a>
       </div>
       <div>
+        <h3>Trade - August 23, 2024</h3>
+        <div>
+          <p>To Mashers:</p>
+          <ul>
+            <li>Bashers 3rd round draft pick (2025)</li>
+          </ul>
+          <p>To Bashers:</p>
+          <ul>
+            <li>SP Seth Lugo KC</li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <div>
         <h3>Trade - April 5, 2024</h3>
         <div>
           <p>To Stallions:</p>
