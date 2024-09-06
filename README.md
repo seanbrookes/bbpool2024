@@ -1,6 +1,8 @@
 # bbpool2024
 Annual friends baseball pool site.
 
+link to Github repo https://github.com/seanbrookes/bbpool2024
+
 Note to self: use Google sheets  for the draft/protected list
 
 at the beginning of the season we need to:
